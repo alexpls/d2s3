@@ -5,7 +5,7 @@ module D2S3
     include D2S3::Signature
 
     def s3_http_upload_tag(options = {})
-      bucket          = options[:bucket]
+      bucket          = options[:bucket] || @@bucket
       access_key_id   = D2S3::S3Config.access_key_id
       key             = options[:key] || ''
       content_type    = options[:content_type] || '' # Defaults to binary/octet-stream if blank
