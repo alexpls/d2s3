@@ -5,14 +5,14 @@ module D2S3
     include D2S3::Signature
 
     def s3_http_upload_tag(options = {})
-      bucket          = D2S3::S3Config.bucket
+      bucket          = options[:bucket]
       access_key_id   = D2S3::S3Config.access_key_id
       key             = options[:key] || ''
       content_type    = options[:content_type] || '' # Defaults to binary/octet-stream if blank
       redirect        = options[:redirect] || '/'
       acl             = options[:acl] || 'public-read'
       expiration_date = (options[:expiration_date] || 10.hours).from_now.utc.strftime('%Y-%m-%dT%H:%M:%S.000Z')
-      max_filesize    = options[:max_filesize] || 1.megabyte
+      max_filesize    = options[:max_filesize] || 10000.megabyte
       min_filesize    = options[:min_filesize] || 1.byte
       submit_button   = options[:submit_button] || submit_tag('Upload')
       
